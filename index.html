@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CE RMS — Battery Usage</title>
+<link rel="stylesheet" href="css/app.css?v=1.6">
+</head>
+<body>
+<!--
+CE RMS Battery Usage GUI V1.6 — LIVE
+API: POST /rest/v1/rpc/get_battery_usage_stretches
+Supabase: https://aynbticohhzgktonsxud.supabase.co
+Frontend uses anon/public key only. PostgreSQL remains the calculation layer.
+API-to-GUI mapping is isolated in js/services/batteryUsageMapper.js.
+Never place service-role keys or database passwords in the frontend.
+-->
+<header>
+    <div class="head">
+        <div>
+            <b>Circular Energy Management Dashboard</b>
+            <small>Battery Usage</small>
+        </div>
+        <div class="header-controls">
+            <span>GUI V1.6 · LIVE</span>
+            <label>Start date<input id="startDate" type="date"></label>
+            <label>End date<input id="endDate" type="date"></label>
+            <label>Site<select id="site"><option value="ALL">All Sites</option></select></label>
+            <button id="refresh">Refresh</button>
+        </div>
+    </div>
+    <nav>
+        <button>Overview</button>
+        <button class="active">Battery Usage</button>
+        <button>Uptime &amp; SLA</button>
+        <button>Energy Analysis</button>
+        <button>Battery Temperature</button>
+    </nav>
+</header>
+<main>
+    <section class="intro">
+        <div>
+            <h1>Battery Usage <span class="version-badge">V1.6</span></h1>
+            <p>Battery contribution to customer load, usage duration and measured battery energy throughput.</p>
+        </div>
+    </section>
+    <div id="error" class="notice error" hidden></div>
+    <div id="app"></div>
+</main>
+<div id="modal"></div>
+<div id="toast"></div>
+<script type="module" src="js/app.js?v=1.6"></script>
+</body>
+</html>
