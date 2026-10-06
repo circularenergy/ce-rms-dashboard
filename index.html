@@ -3,26 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CE RMS — Battery Usage</title>
-<link rel="stylesheet" href="css/app.css?v=1.6">
+<title>CE RMS — Management Dashboard</title>
+<link rel="stylesheet" href="css/app.css?v=1.7">
 </head>
 <body>
 <!--
-CE RMS Battery Usage GUI V1.6 — LIVE
-API: POST /rest/v1/rpc/get_battery_usage_stretches
-Supabase: https://aynbticohhzgktonsxud.supabase.co
-Frontend uses anon/public key only. PostgreSQL remains the calculation layer.
-API-to-GUI mapping is isolated in js/services/batteryUsageMapper.js.
+CE RMS Management Dashboard V1.7
+
+Pages:
+  - Battery Usage (existing V1.6 page preserved)
+  - Uptime & Backup SLA (new V1.7 page)
+
+APIs:
+  POST /rest/v1/rpc/get_battery_usage_stretches
+  POST /rest/v1/rpc/get_rms_uptime_sla
+
+Supabase:
+  https://aynbticohhzgktonsxud.supabase.co
+
+Frontend uses the anon/public key only. PostgreSQL remains the
+calculation layer. API-to-GUI mapping is isolated in service modules.
+
 Never place service-role keys or database passwords in the frontend.
 -->
 <header>
     <div class="head">
         <div>
             <b>Circular Energy Management Dashboard</b>
-            <small>Battery Usage</small>
+            <small id="pageSubtitle">Battery Usage</small>
         </div>
         <div class="header-controls">
-            <span>GUI V1.6 · LIVE</span>
+            <span>GUI V1.7 · LIVE</span>
             <label>Start date<input id="startDate" type="date"></label>
             <label>End date<input id="endDate" type="date"></label>
             <label>Site<select id="site"><option value="ALL">All Sites</option></select></label>
@@ -30,18 +41,18 @@ Never place service-role keys or database passwords in the frontend.
         </div>
     </div>
     <nav>
-        <button>Overview</button>
-        <button class="active">Battery Usage</button>
-        <button>Uptime &amp; SLA</button>
-        <button>Energy Analysis</button>
-        <button>Battery Temperature</button>
+        <button data-page="overview">Overview</button>
+        <button data-page="battery" class="active">Battery Usage</button>
+        <button data-page="uptime">Uptime &amp; Backup SLA</button>
+        <button data-page="energy">Energy Analysis</button>
+        <button data-page="temperature">Battery Temperature</button>
     </nav>
 </header>
 <main>
-    <section class="intro">
+    <section class="intro" id="pageIntro">
         <div>
-            <h1>Battery Usage <span class="version-badge">V1.6</span></h1>
-            <p>Battery contribution to customer load, usage duration and measured battery energy throughput.</p>
+            <h1 id="pageTitle">Uptime &amp; Backup SLA <span class="version-badge">V1.7</span></h1>
+            <p id="pageDescription">Site uptime, CE backup SLA performance, battery usage and energy throughput.</p>
         </div>
     </section>
     <div id="error" class="notice error" hidden></div>
@@ -49,6 +60,6 @@ Never place service-role keys or database passwords in the frontend.
 </main>
 <div id="modal"></div>
 <div id="toast"></div>
-<script type="module" src="js/app.js?v=1.6"></script>
+<script type="module" src="js/app.js?v=1.7"></script>
 </body>
 </html>
