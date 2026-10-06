@@ -2,11 +2,25 @@ import { n, h, e, section } from "./ui.js";
 
 const safe = value => Number.isFinite(Number(value)) ? Number(value) : 0;
 const siteKey = id => String(id || "").replace(/-/g, "");
-const fmtDate = value => {
+/*const fmtDate = value => {
     if (!value) return "—";
     const d = new Date(value);
     if (Number.isNaN(d.getTime())) return String(value);
     return d.toISOString().slice(0, 16).replace("T", " ");
+};
+
+above section was replaced by below section as it was changing the time zone making the date appearing -1hr
+*/
+const fmtDate = value => {
+    if (!value) return "—";
+
+    const s = String(value);
+
+    return s
+        .replace("T", " ")
+        .replace(/Z$/, "")
+        .replace(/\.\d+$/, "")
+        .slice(0, 16);
 };
 
 export function render(D, selectedSite) {
