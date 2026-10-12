@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CE RMS — Management Dashboard</title>
-<link rel="stylesheet" href="css/app.css?v=1.7">
+<link rel="stylesheet" href="css/app.css?v=2.0">
 </head>
 <body>
 <!--
@@ -33,7 +33,7 @@ Never place service-role keys or database passwords in the frontend.
             <small id="pageSubtitle">Battery Usage</small>
         </div>
         <div class="header-controls">
-            <span>GUI V1.7 · LIVE</span>
+            <span>GUI V2.0 · LIVE</span>
             <label>Start date<input id="startDate" type="date"></label>
             <label>End date<input id="endDate" type="date"></label>
             <label>Site<select id="site"><option value="ALL">All Sites</option></select></label>
@@ -46,6 +46,7 @@ Never place service-role keys or database passwords in the frontend.
         <button data-page="uptime">Uptime &amp; Backup SLA</button>
         <button data-page="energy">Energy Analysis</button>
         <button data-page="temperature">Battery Temperature</button>
+        <button data-page="warranty">Battery Warranty Thresholds (BMS)</button>
     </nav>
 </header>
 <main>
@@ -60,6 +61,6 @@ Never place service-role keys or database passwords in the frontend.
 </main>
 <div id="modal"></div>
 <div id="toast"></div>
-<script type="module" src="js/app.js?v=1.7"></script>
+<script type="module" src="js/app.js?v=2.0"></script>
 </body>
 </html>
