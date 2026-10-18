@@ -54,7 +54,7 @@ export const dashboardDisplayConfig = {
       {label:'CE Uptime', metric:'uptime.ceSlaPct', originalMetric:'uptime.ceSlaPct'},
       {label:'Site Uptime', metric:'uptime.siteUptimePct', originalMetric:'uptime.siteUptimePct'},
       {label:'Battery Energy', metric:'battery.energyPerSiteDay', originalMetric:'battery.energyPerSiteDay'},
-      {label:'Battery Run', metric:'energy.battery_run_hrs_total', originalMetric:'battery.hoursPerSiteDay'},
+      {label:'Battery Run', metric:'battery.hoursPerSiteDay', originalMetric:'battery.hoursPerSiteDay'},
       {label:'Solar Performance', metric:'energy.solar_performance_80_pct', originalMetric:'uptime.averageTemp'},
     ],
     sectionTitles: [
