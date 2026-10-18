@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CE RMS — Management Dashboard</title>
+<link rel="stylesheet" href="css/app.css?v=2.2">
+</head>
+<body>
+<!--
+CE RMS Management Dashboard V1.7
+
+Pages:
+  - Battery Usage (existing V1.6 page preserved)
+  - Uptime & Backup SLA (new V1.7 page)
+
+APIs:
+  POST /rest/v1/rpc/get_battery_usage_stretches
+  POST /rest/v1/rpc/get_rms_uptime_sla
+
+Supabase:
+  https://aynbticohhzgktonsxud.supabase.co
+
+Frontend uses the anon/public key only. PostgreSQL remains the
+calculation layer. API-to-GUI mapping is isolated in service modules.
+
+Never place service-role keys or database passwords in the frontend.
+-->
+<header>
+    <div class="head">
+        <div>
+            <b>Circular Energy Management Dashboard</b>
+            <small id="pageSubtitle">Battery Usage</small>
+        </div>
+        <div class="header-controls">
+            <span>GUI V2.2 · LIVE · Nigeria (WAT, GMT+1)</span>
+            <label>Start date<input id="startDate" type="date"></label>
+            <label>End date<input id="endDate" type="date"></label>
+            <label>Site<select id="site"><option value="ALL">All Sites</option></select></label>
+            <button id="refresh">Refresh</button>
+        </div>
+    </div>
+    <div class="v22-preset-bar" aria-label="Reporting date shortcuts"><button data-date-preset="yesterday">Yesterday</button><button data-date-preset="mtd">Month to Date</button><button data-date-preset="lastmonth">Last Month</button><button data-date-preset="week" id="weekQuick">Last Calendar Week</button><label>Calendar week <select id="weekSelect" aria-label="Select ISO calendar week"></select></label><span class="v22-datahealth">Last Data Available: ABJ-1 — · ABJ-2 — · LAG-1 — · LAG-2 — <em>Under Development</em></span></div>
+    <nav>
+        <button data-page="overview">Overview</button>
+        <button data-page="battery" class="active">Battery Usage</button>
+        <button data-page="uptime">Uptime &amp; Backup SLA</button>
+        <button data-page="energy">Energy Analysis</button>
+        <button data-page="temperature">Battery Temperature</button>
+        <button data-page="warranty">Battery Warranty Thresholds (BMS)</button>
+    </nav>
+</header>
+<main>
+    <section class="intro" id="pageIntro">
+        <div>
+            <h1 id="pageTitle">Uptime &amp; Backup SLA <span class="version-badge">V1.7</span></h1>
+            <p id="pageDescription">Site uptime, CE backup SLA performance, battery usage and energy throughput.</p>
+        </div>
+    </section>
+    <div id="error" class="notice error" hidden></div>
+    <div id="app"></div>
+</main>
+<div id="modal"></div>
+<div id="toast"></div>
+<script type="module" src="js/app.js?v=2.2"></script>
+</body>
+</html>

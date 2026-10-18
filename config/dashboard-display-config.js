@@ -1,0 +1,268 @@
+/* CE RMS V2.2 — USER EDITABLE DISPLAY CONFIGURATION
+   Edit only labels, metric IDs, headings, descriptions, tableTitles and footnotes.
+   Allowed metric IDs and their exact API sources are listed BELOW this configuration.
+   Never edit SQL formulas. An unknown metric ID shows N/A and a console warning.
+   The registry determines numerical units, precision, aggregation and null behavior.
+*/
+export const dashboardDisplayConfig = {
+  overview: {
+    title: 'Executive Summary',
+    subtitle: "",
+    kpis: [
+      {label:'CE SLA', metric:'uptime.ceSlaPct', originalMetric:'uptime.ceSlaPct'},
+      {label:'Site Uptime', metric:'uptime.siteUptimePct', originalMetric:'uptime.siteUptimePct'},
+      {label:'Battery Energy', metric:'energy.battery_energy_throughput_kwh', originalMetric:'energy.battery_energy_throughput_kwh'},
+      {label:'Battery Run', metric:'energy.battery_run_hrs_total', originalMetric:'energy.battery_run_hrs_total'},
+      {label:'Solar Performance', metric:'energy.solar_performance_80_pct', originalMetric:null},
+    ],
+    sectionTitles: [
+      'Portfolio Operating Status',
+      'Management Attention',
+      'Explore Detailed Reports',
+      'Management Weekly Reporting Dashboard',
+    ],
+    sectionDescriptions: {},
+    tableTitles: {},
+    footnotes: {},
+  },
+  energy: {
+    title: 'Energy Analysis',
+    subtitle: "",
+    kpis: [
+      {label:'Customer Energy', metric:'energy.customer_energy_consumption_kwh', originalMetric:'energy.customer_energy_consumption_kwh'},
+      {label:'DG/Grid Energy', metric:'energy.dg_grid_energy_kwh', originalMetric:'energy.dg_grid_energy_kwh'},
+      {label:'Solar Contribution', metric:'energy.solar_energy_pct', originalMetric:'energy.solar_energy_pct'},
+      {label:'Battery Throughput', metric:'energy.battery_energy_throughput_kwh', originalMetric:'energy.battery_energy_throughput_kwh'},
+      {label:'Solar Performance', metric:'energy.solar_performance_80_pct', originalMetric:'energy.solar_performance_80_pct'},
+    ],
+    sectionTitles: [
+      'Runtime Performance of Each Power Source (hrs/day)',
+      'Equipment Energy Throughput (kWh/day)',
+      'Solar Performance',
+      'Battery Run Hours & Cycles Per Day',
+      'Energy Source Profile',
+      'Monthly Customer Load Profile — 12 Months',
+    ],
+    sectionDescriptions: {},
+    tableTitles: {},
+    footnotes: {},
+  },
+  uptime: {
+    title: 'Uptime & Backup SLA',
+    subtitle: "",
+    kpis: [
+      {label:'CE Uptime', metric:'uptime.ceSlaPct', originalMetric:'uptime.ceSlaPct'},
+      {label:'Site Uptime', metric:'uptime.siteUptimePct', originalMetric:'uptime.siteUptimePct'},
+      {label:'Battery Energy', metric:'battery.energyPerSiteDay', originalMetric:'battery.energyPerSiteDay'},
+      {label:'Battery Run', metric:'energy.battery_run_hrs_total', originalMetric:'battery.hoursPerSiteDay'},
+      {label:'Solar Performance', metric:'energy.solar_performance_80_pct', originalMetric:'uptime.averageTemp'},
+    ],
+    sectionTitles: [
+      'Uptime SLA',
+      'Battery Usage',
+      'Battery SLA Cycle Tracking',
+      'Battery Usage Contribution Run Duration Distribution',
+      'Battery Temperature Monitoring',
+      'Battery Temperature Trend',
+      'Battery SOC Trend',
+      'Battery SOH Trend',
+    ],
+    sectionDescriptions: {},
+    tableTitles: {},
+    footnotes: {},
+  },
+  battery: {
+    title: 'Battery Usage',
+    subtitle: "",
+    kpis: [
+      {label:'Total Battery Usage', metric:'battery.totalHours', originalMetric:'battery.totalHours'},
+      {label:'Total Battery Energy', metric:'battery.totalEnergy', originalMetric:'battery.totalEnergy'},
+      {label:'Total Contribution Runs', metric:'battery.totalRuns', originalMetric:'battery.totalRuns'},
+      {label:'Full Battery Usage', metric:'battery.fullHours', originalMetric:'battery.fullHours'},
+      {label:'Partial Battery Usage', metric:'battery.partialHours', originalMetric:'battery.partialHours'},
+    ],
+    sectionTitles: [
+      'Portfolio Overview (Grand Total)',
+      'Site Performance Summary',
+      'Battery SLA Cycle Tracking',
+      'Battery Temperature Monitoring',
+      'Battery Usage Contribution Run Duration Distribution',
+      'Data Quality',
+    ],
+    sectionDescriptions: {},
+    tableTitles: {},
+    footnotes: {},
+  },
+};
+
+/* ========================================================================
+   AVAILABLE METRICS — grouped by dashboard/report section for easy copying
+   Each metric ID is selectable in ANY page KPI slot. A page loads additional
+   APIs only where its configured metric IDs require them.
+   ========================================================================
+
+   ENERGY ANALYSIS / ENERGY SOURCE, LOAD & SOLAR
+   energy.sanctioned_load_kw                         | kW                 | get_rms_energy_output V1.22: site_summary[].sanctioned_load_kw
+   energy.customer_peak_load_kw                      | kW                 | get_rms_energy_output V1.22: site_summary[].customer_peak_load_kw
+   energy.customer_average_load_kw                   | kW                 | get_rms_energy_output V1.22: site_summary[].customer_average_load_kw
+   energy.backup_sla_hrs                             | h/day              | get_rms_energy_output V1.22: site_summary[].backup_sla_hrs
+   energy.dg_hrs                                     | h/day              | get_rms_energy_output V1.22: site_summary[].dg_hrs
+   energy.grid_hrs                                   | h/day              | get_rms_energy_output V1.22: site_summary[].grid_hrs
+   energy.solar_psh                                  | h                  | get_rms_energy_output V1.22: site_summary[].solar_psh
+   energy.battery_cycles                             | cycles/day         | get_rms_energy_output V1.22: site_summary[].battery_cycles
+   energy.batt_energy_pct                            | % (API ratio)      | get_rms_energy_output V1.22: site_summary[].batt_energy_pct
+   energy.dg_grid_run_hrs                            | h/day              | get_rms_energy_output V1.22: site_summary[].dg_grid_run_hrs
+   energy.batt_dod_avg_pct                           | %                  | get_rms_energy_output V1.22: site_summary[].batt_dod_avg_pct
+   energy.batt_dod_max_pct                           | %                  | get_rms_energy_output V1.22: site_summary[].batt_dod_max_pct
+   energy.batt_dod_min_pct                           | %                  | get_rms_energy_output V1.22: site_summary[].batt_dod_min_pct
+   energy.solar_energy_kwh                           | kWh/day            | get_rms_energy_output V1.22: site_summary[].solar_energy_kwh
+   energy.solar_energy_pct                           | % (API ratio)      | get_rms_energy_output V1.22: site_summary[].solar_energy_pct
+   energy.total_energy_kwh                           | kWh/day            | get_rms_energy_output V1.22: site_summary[].total_energy_kwh
+   energy.batt_soh_last_pct                          | %                  | get_rms_energy_output V1.22: site_summary[].batt_soh_last_pct
+   energy.dg_grid_energy_kwh                         | kWh/day            | get_rms_energy_output V1.22: site_summary[].dg_grid_energy_kwh
+   energy.dg_grid_energy_pct                         | % (API ratio)      | get_rms_energy_output V1.22: site_summary[].dg_grid_energy_pct
+   energy.peak_solar_power_kw                        | kW                 | get_rms_energy_output V1.22: site_summary[].peak_solar_power_kw
+   energy.batt_soh_present_pct                       | %                  | get_rms_energy_output V1.22: site_summary[].batt_soh_present_pct
+   energy.peak_solar_power_pct                       | % (API ratio)      | get_rms_energy_output V1.22: site_summary[].peak_solar_power_pct
+   energy.battery_run_hrs_total                      | h/day              | get_rms_energy_output V1.22: site_summary[].battery_run_hrs_total
+   energy.solar_avg_per_hour_kwh                     | kWh/day            | get_rms_energy_output V1.22: site_summary[].solar_avg_per_hour_kwh
+   energy.batt_bms_cycles_present                    | count / API unit   | get_rms_energy_output V1.22: site_summary[].batt_bms_cycles_present
+   energy.battery_run_hrs_prorated                   | h/day              | get_rms_energy_output V1.22: site_summary[].battery_run_hrs_prorated
+   energy.customer_energy_consumption_kwh            | kWh/day            | get_rms_energy_output V1.22: site_summary[].customer_energy_consumption_kwh
+   energy.solar_performance_80_pct                   | % (API ratio)      | get_rms_energy_output V1.22: site_summary[].solar_performance_80_pct
+   energy.solar_designed_capacity_kw                 | kW                 | get_rms_energy_output V1.22: site_summary[].solar_designed_capacity_kw
+   energy.battery_energy_throughput_kwh              | kWh/day            | get_rms_energy_output V1.22: site_summary[].battery_energy_throughput_kwh
+   energy.solar_availability_per_day_hrs             | h/day              | get_rms_energy_output V1.22: site_summary[].solar_availability_per_day_hrs
+
+   UPTIME & BACKUP SLA / SLA FIELDS
+   uptime.ceSlaPct                                   | ceSlaPct           | get_rms_uptime_sla V3.1 (mapped)
+   uptime.siteUptimePct                              | siteUptimePct      | get_rms_uptime_sla V3.1 (mapped)
+   uptime.missingRows                                | missingRows        | get_rms_uptime_sla V3.1 (mapped)
+   uptime.siteDowntime                               | siteDowntime       | get_rms_uptime_sla V3.1 (mapped)
+   uptime.ceDowntime                                 | ceDowntime         | get_rms_uptime_sla V3.1 (mapped)
+   uptime.averageTemp                                | averageTemp        | get_rms_uptime_sla V3.1 (mapped)
+
+   BATTERY USAGE / HOURS, ENERGY, RUNS
+   battery.totalHours                                | totalHours         | get_battery_usage_stretches V3.1 (mapped)
+   battery.totalEnergy                               | totalEnergy        | get_battery_usage_stretches V3.1 (mapped)
+   battery.totalRuns                                 | totalRuns          | get_battery_usage_stretches V3.1 (mapped)
+   battery.fullHours                                 | fullHours          | get_battery_usage_stretches V3.1 (mapped)
+   battery.partialHours                              | partialHours       | get_battery_usage_stretches V3.1 (mapped)
+   battery.fullRuns                                  | fullRuns           | get_battery_usage_stretches V3.1 (mapped)
+   battery.partialRuns                               | partialRuns        | get_battery_usage_stretches V3.1 (mapped)
+   battery.fullEnergy                                | fullEnergy         | get_battery_usage_stretches V3.1 (mapped)
+   battery.partialEnergy                             | partialEnergy      | get_battery_usage_stretches V3.1 (mapped)
+   battery.energyPerSiteDay                          | energyPerSiteDay   | get_battery_usage_stretches V3.1 (mapped)
+   battery.hoursPerSiteDay                           | hoursPerSiteDay    | get_battery_usage_stretches V3.1 (mapped)
+
+   Load Profile V1.0 is currently dedicated to the 12-month table, not KPI slots.
+   Portfolio percentages must not be interpreted as contract-weighted SLA.
+   ======================================================================== */
+
+/* ========================================================================
+   ALL SELECTABLE METRICS — V2.2 REGISTRY CATALOGUE (48 / 48 VERIFIED)
+   ------------------------------------------------------------------------
+   EDIT GUIDE
+   - Change only "label" and "metric" in the configuration above.
+   - Leave "originalMetric" untouched. It retains V2.1 compatibility.
+   - Copy a Metric ID from below. Every entry exists in js/config/metricRegistry.js.
+   - The same registered metric may be selected on any KPI page; the runtime
+     loads a needed API where supported by the current page data loader.
+   - Registered does NOT mean the metric is already displayed in a KPI.
+   - Do not copy the SQL JSON field name: copy the full metric ID (e.g. energy.solar_energy_kwh).
+   - This is a reference comment, not executable code or a list of raw DB columns.
+   - Energy API latest Library SQL is V1.23; the metric identifiers are the
+     existing V2.2 registry identifiers, which were established against V1.22.
+     Confirm any API schema changes separately; no API code is changed here.
+   - An SQL API decimal ratio (e.g. 0.45) displays as 45% after formatting.
+   - Important: changing metric to energy.solar_performance_80_pct uses the
+     installed frontend resolver. For the current V2.2 solar hotfix keep the
+     separately provided patched energyAnalysisPage.js and metricRegistry.js.
+   - Some metrics aggregate selected sites by summation according to registry
+     logic; a metric name alone does NOT guarantee a weighted portfolio mean.
+
+   ENERGY ANALYSIS — CUSTOMER LOAD / DEMAND
+   Metric ID                                         | Source output JSON field                 | Unit            | Meaning / calculation basis
+   energy.sanctioned_load_kw                         | site_summary[].sanctioned_load_kw       | kW              | Sanctioned customer load
+   energy.customer_average_load_kw                   | site_summary[].customer_average_load_kw | kW              | Average customer demand (API definition)
+   energy.customer_peak_load_kw                      | site_summary[].customer_peak_load_kw    | kW              | Peak customer demand
+   energy.customer_energy_consumption_kwh            | site_summary[].customer_energy_consumption_kwh | kWh/day         | Customer energy (API daily reporting basis)
+
+   ENERGY ANALYSIS — DG / GRID POWER
+   Metric ID                                         | Source output JSON field                 | Unit            | Meaning / calculation basis
+   energy.dg_hrs                                     | site_summary[].dg_hrs                   | h/day           | DG runtime per day, topology based
+   energy.grid_hrs                                   | site_summary[].grid_hrs                 | h/day           | Grid runtime per day, topology based
+   energy.dg_grid_run_hrs                            | site_summary[].dg_grid_run_hrs          | h/day           | Combined DG/grid runtime per day
+   energy.dg_grid_energy_kwh                         | site_summary[].dg_grid_energy_kwh       | kWh/day         | DG/grid energy per day
+   energy.dg_grid_energy_pct                         | site_summary[].dg_grid_energy_pct       | % (API ratio)   | DG/grid share of energy; returned as decimal ratio
+
+   ENERGY ANALYSIS — SOLAR
+   Metric ID                                         | Source output JSON field                 | Unit            | Meaning / calculation basis
+   energy.solar_designed_capacity_kw                 | site_summary[].solar_designed_capacity_kw | kW              | Site solar designed capacity
+   energy.solar_energy_kwh                           | site_summary[].solar_energy_kwh         | kWh/day         | Actual solar energy per day
+   energy.solar_energy_pct                           | site_summary[].solar_energy_pct         | % (API ratio)   | Solar share of energy; returned as decimal ratio
+   energy.solar_psh                                  | site_summary[].solar_psh                | h               | ACHIEVED solar peak sun hours (not configured site_psh)
+   energy.solar_avg_per_hour_kwh                     | site_summary[].solar_avg_per_hour_kwh   | kWh/day         | Average solar energy per solar-available hour; inspect unit in API
+   energy.solar_availability_per_day_hrs             | site_summary[].solar_availability_per_day_hrs | h/day           | Hours/day with solar availability
+   energy.peak_solar_power_kw                        | site_summary[].peak_solar_power_kw      | kW              | Peak observed solar power
+   energy.peak_solar_power_pct                       | site_summary[].peak_solar_power_pct     | % (API ratio)   | Peak solar output vs design; API ratio
+   energy.solar_performance_80_pct                   | site_summary[].solar_performance_80_pct | % (API ratio)   | Solar performance vs configured site_psh and 80% reference; API ratio
+
+   ENERGY ANALYSIS — BATTERY OPERATION / THROUGHPUT
+   Metric ID                                         | Source output JSON field                 | Unit            | Meaning / calculation basis
+   energy.battery_run_hrs_total                      | site_summary[].battery_run_hrs_total    | h/day           | Battery running hours per day
+   energy.battery_run_hrs_prorated                   | site_summary[].battery_run_hrs_prorated | h/day           | Prorated battery runtime per day
+   energy.battery_energy_throughput_kwh              | site_summary[].battery_energy_throughput_kwh | kWh/day         | Battery discharge energy per day (Energy API definition)
+   energy.battery_cycles                             | site_summary[].battery_cycles           | cycles/day      | Calculated equivalent cycles/day
+   energy.batt_energy_pct                            | site_summary[].batt_energy_pct          | % (API ratio)   | Battery energy/energy basis ratio (API ratio)
+
+   ENERGY ANALYSIS — BATTERY HEALTH / BMS
+   Metric ID                                         | Source output JSON field                 | Unit            | Meaning / calculation basis
+   energy.batt_soh_last_pct                          | site_summary[].batt_soh_last_pct        | %               | Previous/last BMS state of health
+   energy.batt_soh_present_pct                       | site_summary[].batt_soh_present_pct     | %               | Current/present BMS state of health
+   energy.batt_dod_min_pct                           | site_summary[].batt_dod_min_pct         | %               | Minimum depth of discharge
+   energy.batt_dod_max_pct                           | site_summary[].batt_dod_max_pct         | %               | Maximum depth of discharge
+   energy.batt_dod_avg_pct                           | site_summary[].batt_dod_avg_pct         | %               | Average depth of discharge
+   energy.batt_bms_cycles_present                    | site_summary[].batt_bms_cycles_present  | count / API unit | BMS cumulative cycle counter (aggregated in API)
+
+   ENERGY ANALYSIS — CROSS-SOURCE / SITE REFERENCE
+   Metric ID                                         | Source output JSON field                 | Unit            | Meaning / calculation basis
+   energy.total_energy_kwh                           | site_summary[].total_energy_kwh         | kWh/day         | Total supplied energy/day
+   energy.backup_sla_hrs                             | site_summary[].backup_sla_hrs           | h/day           | Site backup SLA requirement in hours
+
+   UPTIME & BACKUP SLA — PERFORMANCE / DATA QUALITY
+   Metric ID | Registered source field                  | Unit            | Meaning / source basis
+   uptime.ceSlaPct                                   | ce_sla_uptime_pct                       | %               | CE SLA uptime percentage from Uptime summary
+   uptime.siteUptimePct                              | site_uptime_pct                         | %               | Site uptime percentage from Uptime summary
+   uptime.missingRows                                | missing_data_rows                       | rows            | Missing telemetry rows in reporting window
+   uptime.siteDowntime                               | site_downtime_hours                     | h               | Site downtime hours
+   uptime.ceDowntime                                 | ce_attributable_downtime_hours          | h               | CE-attributable downtime hours
+   uptime.averageTemp                                | frontend averageTemp                    | °C              | Frontend computed temperature average from uptime records
+   NOTE: Uptime context is a frontend aggregation of Uptime V3.1 site results; these are not necessarily root-level JSON field names.
+
+   BATTERY USAGE — CONTRIBUTION HOURS / ENERGY
+   Metric ID                                         | API field / frontend derivation          | Unit            | Meaning / source basis
+   battery.totalHours                                | total_hours                             | h               | Total contribution hours summed across selected sites
+   battery.totalEnergy                               | total_battery_energy_kwh                | kWh             | Total battery energy from Battery Usage API; distinct from Energy API discharge throughput
+   battery.fullHours                                 | full_hours                              | h               | Full contribution hours, selected sites
+   battery.partialHours                              | partial_hours                           | h               | Partial contribution hours, selected sites
+   battery.fullEnergy                                | full_energy_kwh                         | kWh             | Full contribution battery energy
+   battery.partialEnergy                             | partial_energy_kwh                      | kWh             | Partial contribution battery energy
+
+   BATTERY USAGE — RUN COUNTS
+   Metric ID                                         | API field / frontend derivation          | Unit            | Meaning / source basis
+   battery.totalRuns                                 | full_run_count + partial_run_count      | runs            | Sum of full and partial contribution counts
+   battery.fullRuns                                  | full_run_count                          | runs            | Full contribution run counts
+   battery.partialRuns                               | partial_run_count                       | runs            | Partial contribution run counts
+
+   BATTERY USAGE — DERIVED DAILY AVERAGES
+   Metric ID                                         | API field / frontend derivation          | Unit            | Meaning / source basis
+   battery.energyPerSiteDay                          | totalEnergy / reporting days / site count | kWh/day         | Frontend daily energy per selected site
+   battery.hoursPerSiteDay                           | totalHours / reporting days / site count | h/day           | Frontend daily battery contribution hours per site
+
+   OTHER OUTPUTS
+   - get_rms_load_profile V1.0 feeds the monthly profile table; its values
+     are NOT exposed as selectable KPI IDs in the current V2.2 registry.
+   - Other JavaScript locals, API JSON fields, and DB columns are NOT
+     automatically selectable until specifically added to metricRegistry.js.
+   ======================================================================== */

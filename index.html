@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CE RMS — Management Dashboard</title>
-<link rel="stylesheet" href="css/app.css?v=2.0">
+<link rel="stylesheet" href="css/app.css?v=2.2">
 </head>
 <body>
 <!--
@@ -33,13 +33,14 @@ Never place service-role keys or database passwords in the frontend.
             <small id="pageSubtitle">Battery Usage</small>
         </div>
         <div class="header-controls">
-            <span>GUI V2.0 · LIVE</span>
+            <span>GUI V2.2 · LIVE · Nigeria (WAT, GMT+1)</span>
             <label>Start date<input id="startDate" type="date"></label>
             <label>End date<input id="endDate" type="date"></label>
             <label>Site<select id="site"><option value="ALL">All Sites</option></select></label>
             <button id="refresh">Refresh</button>
         </div>
     </div>
+    <div class="v22-preset-bar" aria-label="Reporting date shortcuts"><span class="v22-datahealth" style="margin-left:0">Last Data Available: ABJ-1 — · ABJ-2 — · LAG-1 — · LAG-2 — <em>Under Development</em></span><button data-date-preset="yesterday" style="margin-left:auto">Yesterday</button><button data-date-preset="mtd">Month to Date</button><button data-date-preset="lastmonth">Last Month</button><button data-date-preset="week" id="weekQuick">Last Calendar Week</button><label>Calendar week <select id="weekSelect" aria-label="Select ISO calendar week"></select></label></div>
     <nav>
         <button data-page="overview">Overview</button>
         <button data-page="battery" class="active">Battery Usage</button>
@@ -61,6 +62,6 @@ Never place service-role keys or database passwords in the frontend.
 </main>
 <div id="modal"></div>
 <div id="toast"></div>
-<script type="module" src="js/app.js?v=2.0"></script>
+<script type="module" src="js/app.js?v=2.2"></script>
 </body>
 </html>

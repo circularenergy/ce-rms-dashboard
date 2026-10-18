@@ -35,3 +35,16 @@ Never place service-role keys or database passwords in frontend code.
 - Energy Source Profile: 100% stacked DG/Grid and solar bars, segment percentages, two-line total energy kWh/site x-axis.
 - Battery Run Hours & Cycles: dual-axis combination chart.
 - Existing API calculations, site/calendar filters, other pages and service files unchanged.
+
+
+## V2.2 (18 Oct 2026) — configuration and calendar controls
+- Default dates are month start through current date in Africa/Lagos (Nigeria/WAT).
+- Date presets: Yesterday, Month to Date, Last Month, Last completed ISO calendar week (Monday–Sunday); 105-week selector. Last 24 Hours is deferred.
+- `config/dashboard-display-config.js` is the only user-editable file for page/KPI labels, KPI metric IDs, section headings, and optional CSS selector-based table titles/footnotes. Its bottom section contains the section-grouped metric catalogue.
+- `js/config/metricRegistry.js` is protected: units, precision, available metrics and allowed source API.
+- `js/config/displayController.js` applies display settings after original rendering. This preserves original SQL APIs and their calculations.
+- Optional additional API requests only occur when chosen KPI metrics require them. Existing page requests remain isolated.
+- `Last Data Available` is a disabled placeholder until the dedicated Data Health API is developed.
+- Zero-as-dash applies to plain numeric cells in table bodies and footers only. Nulls are not converted to zero.
+- Date-filtered energy output V1.22 still uses its pre-existing daily normalization; incomplete-data correction is a separate backend task.
+- No browser-based persistence: edit the file in the GitHub repository to apply changes.

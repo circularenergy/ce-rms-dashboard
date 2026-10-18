@@ -17,3 +17,6 @@
 
 /* V2.1: energy charts — responsive SVG plot areas, axes, two-tier X labels, legends */
 .v21-chart{padding:7px 8px 5px;min-width:0}.v21-svg{display:block;width:100%;height:auto;max-height:360px;overflow:visible}.v21-tick{font:11px Arial,sans-serif;fill:#56616b}.v21-axis{font:12px Arial,sans-serif;fill:#4d5660}.v21-x{font:11px Arial,sans-serif;fill:#515b63}.v21-value{font:10px Arial,sans-serif;fill:#35414a}.v21-chart .v2-legend{margin-top:5px;margin-bottom:10px}.v21-chart .v2-legend i{border-radius:1px}.v2-chart-grid .section .body{min-width:0}
+
+/* CE RMS Dashboard V2.2 — Nigeria time-zone, date shortcuts and deferred data health */
+.v22-preset-bar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:5px 24px;border-top:1px solid #dfe9f2;background:#f8fbfe;font-size:11px}.v22-preset-bar button{border:1px solid #cfdfec;background:#fff;color:#195880;border-radius:5px;padding:6px 9px;cursor:pointer;font-size:11px}.v22-preset-bar button:hover{background:#e5f4ff}.v22-preset-bar select{max-width:220px;padding:4px;border:1px solid #cfdfec;border-radius:4px}.v22-preset-bar label{display:flex;align-items:center;gap:5px}.v22-datahealth{margin-left:auto;color:#a4acb5;font-size:10px}.v22-datahealth em{font-style:normal;color:#b0b8c0}@media(max-width:750px){.v22-preset-bar{padding:6px 10px}.v22-datahealth{margin-left:0;width:100%}}
